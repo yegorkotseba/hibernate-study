@@ -17,43 +17,22 @@ public class ExampleMain {
         Class.forName ("org.h2.Driver");
         Connection conn = DriverManager.getConnection ("jdbc:h2:~/test", "sa","");
         Statement stmt = conn.createStatement();
-
         stmt.executeUpdate("DROP TABLE AGENTS");
         stmt.executeUpdate("DROP TABLE CUSTOMER");
         stmt.executeUpdate("DROP TABLE ORDERS");
         RunScript.execute(conn, new FileReader("src/main/resources/database.sql"));
-
-        /*ResultSet rs = stmt.executeQuery("SELECT * FROM AGENTS");
-        while(rs.next()){
-            System.out.println("Agentcode:"+rs.getString("AGENT_CODE") + " " + rs.getString("COMMISSION"));
-        }*/
         conn.close();
-
-
-//        SessionFactory sessionFactory = new Configuration().configure().addAnnotatedClass(entities.Agent.class).addResource("entities.Agent.hbm.xml")
-//                .buildSessionFactory();
 
         SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
         try {
-//            persist(sessionFactory);
-//            load(sessionFactory);
-            load2(sessionFactory);
-            load3(sessionFactory);
+            loadAgents(sessionFactory);
+            loadCustomers(sessionFactory);
         } finally {
             sessionFactory.close();
         }
     }
 
-    private static void load(SessionFactory sessionFactory) {
-        System.out.println("-- loading persons --");
-        Session session = sessionFactory.openSession();
-        @SuppressWarnings("unchecked")
-        List<Person> persons = session.createQuery("FROM Person").list();
-        persons.forEach((x) -> System.out.printf("- %s%n", x));
-        session.close();
-    }
-
-    private static void load2(SessionFactory sessionFactory) {
+    private static void loadAgents(SessionFactory sessionFactory) {
         System.out.println("-- loading agents --");
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
@@ -63,7 +42,7 @@ public class ExampleMain {
         session.close();
     }
 
-    private static void load3(SessionFactory sessionFactory) {
+    private static void loadCustomers(SessionFactory sessionFactory) {
         System.out.println("-- loading customers --");
         Session session = sessionFactory.openSession();
         @SuppressWarnings("unchecked")
@@ -72,27 +51,4 @@ public class ExampleMain {
         session.close();
     }
 
-    private static void persist(SessionFactory sessionFactory) {
-        Person p1 = new Person("John", 12);
-        Person p2 = new Person("Tina", 13);
-        System.out.println("-- persisting persons --");
-        System.out.printf("- %s%n- %s%n", p1, p2);
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(p1);
-        session.save(p2);
-        session.getTransaction().commit();
-    }
-
-    private static void persist2(SessionFactory sessionFactory) {
-        Agent agent = new Agent( "someCode");
-        System.out.println("-- persisting agents --");
-        System.out.printf("- %s%n - ", agent);
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(agent);
-        session.getTransaction().commit();
-    }
 }
