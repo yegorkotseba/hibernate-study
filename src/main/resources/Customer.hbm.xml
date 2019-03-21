@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 11, 2016 10:24:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="entities.Customer" table="CUSTOMER">
+        <id name="customerCode" type="java.lang.String">
+            <column name="CUST_CODE" />
+            <generator class="assigned" />
+        </id>
+        <property name="customerName" type="java.lang.String">
+            <column name="CUST_NAME" />
+        </property>
+        <property name="customerCity" type="java.lang.String">
+            <column name="CUST_CITY" />
+        </property>
+        <property name="workingArea" type="java.lang.String">
+            <column name="WORKING_AREA" />
+        </property>
+        <property name="customerCountry" type="java.lang.String">
+            <column name="CUST_COUNTRY" />
+        </property>
+        <property name="grade" type="java.lang.Double">
+            <column name="GRADE" />
+        </property>
+        <property name="openingAmt" type="java.lang.Double">
+            <column name="OPENING_AMT" />
+        </property>
+        <property name="receiveAmt" type="java.lang.Double">
+            <column name="RECEIVE_AMT" />
+        </property>
+        <property name="paymentAmt" type="java.lang.Double">
+            <column name="PAYMENT_AMT" />
+        </property>
+        <property name="outstandingAmt" type="java.lang.Double">
+            <column name="OUTSTANDING_AMT" />
+        </property>
+        <property name="phoneNumber" type="java.lang.String">
+            <column name="PHONE_NO" />
+        </property>
+        <property name="agentCode" type="java.lang.String">
+            <column name="AGENT_CODE" />
+        </property>
+        <many-to-one name="agentCode" class="entities.Customer" column="AGENT_CODE"/>
+    </class>
+</hibernate-mapping>
