@@ -1,4 +1,3 @@
-import entities.Agent;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -13,8 +12,6 @@ public class HibernateUtility {
 
         if (factory == null) {
             factory = new Configuration().configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Agent.class)
-                    .addResource("Agent.hbm.xml")
                     .buildSessionFactory();
         }
         return factory;
