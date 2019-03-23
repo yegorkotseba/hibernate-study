@@ -13,7 +13,7 @@ public class HibernateUtility {
     public static synchronized SessionFactory getSessionFactory() {
 
         if (factory == null) {
-            factory = new Configuration().configure("hibernate.cfg.xml")
+            factory = new Configuration()
                     .addAnnotatedClass(Agent.class)
                     .addAnnotatedClass(Customer.class)
                     .buildSessionFactory();
