@@ -27,9 +27,8 @@ public class HibernateTest {
 
     @Test
     void getAllTables(){
-
-        DbService.loadAgents(sessionFactory);
-        DbService.loadCustomers(sessionFactory);
+        DbSteps.loadAgents(sessionFactory);
+        DbSteps.loadCustomers(sessionFactory);
     }
 
     @AfterClass

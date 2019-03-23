@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class DbService {
+public class DbSteps {
 
     public static void loadAgents(SessionFactory sessionFactory) {
         System.out.println("-- loading agents --");
