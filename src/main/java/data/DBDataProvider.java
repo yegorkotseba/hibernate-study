@@ -1,20 +1,15 @@
+package data;
+
 import org.h2.tools.RunScript;
-import org.hibernate.SessionFactory;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class HibernateTest {
+public class DBDataProvider {
 
-    public static final SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
-
-    @BeforeClass
-    void prepareData() throws Exception{
+    public static void createTables() throws Exception{
         Class.forName ("org.h2.Driver");
         Connection conn = DriverManager.getConnection ("jdbc:h2:~/test", "","");
         Statement stmt = conn.createStatement();
@@ -23,16 +18,5 @@ public class HibernateTest {
         stmt.executeUpdate("DROP TABLE ORDERS");
         RunScript.execute(conn, new FileReader("src/main/resources/database.sql"));
         conn.close();
-    }
-
-    @Test
-    void getAllTables(){
-        DbSteps.loadAgents(sessionFactory);
-        DbSteps.loadCustomers(sessionFactory);
-    }
-
-    @AfterClass
-    void closeConnection(){
-        sessionFactory.close();
     }
 }

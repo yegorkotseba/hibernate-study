@@ -3,11 +3,11 @@ import entities.Customer;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtility {
+public class HibernateSessionFactory {
 
     public static SessionFactory factory;
 
-    private HibernateUtility() {
+    private HibernateSessionFactory() {
     }
 
     public static synchronized SessionFactory getSessionFactory() {
