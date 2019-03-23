@@ -10,7 +10,7 @@ public class HibernateTest {
     public static final SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
 
     @BeforeClass
-    void prepareData() throws Exception{
+    void prepareData() {
         DBDataProvider.createTables();
     }
 
