@@ -21,6 +21,5 @@ public class DBDataProvider {
             conn.close();
         }
         catch (Exception e){}
-
     }
 }
