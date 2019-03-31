@@ -3,8 +3,10 @@ package steps;
 import entities.Agent;
 import entities.Customer;
 import entities.Order;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -52,5 +54,25 @@ public class DbSteps {
                 x.getAgentCode() + SPACE +
                 x.getOrderDescription()));
         session.close();
+    }
+
+    public static void insertNewAgent(Agent agent, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try
+        {
+            tx = session.beginTransaction();
+            session.save(agent);
+            tx.commit();
+        }
+        catch (HibernateException ex)
+        {
+            if(tx != null)
+                tx.rollback();
+        }
+        finally
+        {
+            session.close();
+        }
     }
 }

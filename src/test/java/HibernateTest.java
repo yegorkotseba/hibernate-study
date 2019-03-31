@@ -1,4 +1,6 @@
 import data.DBDataProvider;
+import data.HibernateDataProvider;
+import entities.Agent;
 import org.hibernate.SessionFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,6 +21,12 @@ public class HibernateTest {
         DbSteps.printAllAgents(sessionFactory);
         DbSteps.printAllCustomers(sessionFactory);
         DbSteps.printAllOrders(sessionFactory);
+    }
+
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "newAgent")
+    void insertAgent(Agent agent) {
+        DbSteps.insertNewAgent(agent, sessionFactory);
+        DbSteps.printAllAgents(sessionFactory);
     }
 
     @AfterClass
