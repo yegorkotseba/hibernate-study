@@ -1,11 +1,11 @@
 package entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer implements Serializable{
+public class Customer {
 
     @Id
     @Column(name = "CUST_CODE")
@@ -38,8 +38,7 @@ public class Customer implements Serializable{
     @Column(name = "PHONE_NO")
     private String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "AGENT_CODE", referencedColumnName = "AGENT_CODE")
+    @Column(name = "AGENT_CODE")
     private String agentCode;
 
     public String getCustomerCode() {
@@ -122,11 +121,8 @@ public class Customer implements Serializable{
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAgentCode() {
-        return agentCode;
-    }
+    @ManyToOne(targetEntity = Agent.class)
+    public String getAgentCode() { return agentCode; }
 
-    public void setAgentCode(String agentCode) {
-        this.agentCode = agentCode;
-    }
+    public void setAgentCode(String agentCode) { this.agentCode = agentCode; }
 }

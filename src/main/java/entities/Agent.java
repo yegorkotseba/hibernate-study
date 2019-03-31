@@ -4,11 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "AGENTS")
-public class Agent implements Serializable{
+public class Agent {
     @Id
     @Column(name = "AGENT_CODE")
     private String agentCode;
@@ -29,10 +28,6 @@ public class Agent implements Serializable{
     private String country;
 
     public Agent(){}
-
-    public Agent(String agentCode){
-        this.agentCode = agentCode;
-    }
 
     public String getAgentCode() {
         return agentCode;
