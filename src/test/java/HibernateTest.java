@@ -16,9 +16,9 @@ public class HibernateTest {
 
     @Test
     void getAllTables(){
-        DbSteps.loadAgents(sessionFactory);
-        DbSteps.loadCustomers(sessionFactory);
-        DbSteps.loadOrders(sessionFactory);
+        DbSteps.printAllAgents(sessionFactory);
+        DbSteps.printAllCustomers(sessionFactory);
+        DbSteps.printAllOrders(sessionFactory);
     }
 
     @AfterClass

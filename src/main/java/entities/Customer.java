@@ -20,6 +20,9 @@ public class Customer {
     @Column(name = "WORKING_AREA")
     private String workingArea;
 
+    @Column(name = "CUST_COUNTRY")
+    private String customerCountry;
+
     @Column(name = "GRADE")
     private double grade;
 
@@ -72,6 +75,10 @@ public class Customer {
     public void setWorkingArea(String workingArea) {
         this.workingArea = workingArea;
     }
+
+    public String getCustomerCountry() { return customerCountry; }
+
+    public void setCustomerCountry(String customerCountry) { this.customerCountry = customerCountry; }
 
     public double getGrade() {
         return grade;
