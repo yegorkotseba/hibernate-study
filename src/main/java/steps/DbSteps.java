@@ -2,6 +2,7 @@ package steps;
 
 import entities.Agent;
 import entities.Customer;
+import entities.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -25,6 +26,15 @@ public class DbSteps {
         @SuppressWarnings("unchecked")
         List<Customer> customers = session.createQuery("FROM entities.Customer").list();
         customers.forEach((x) -> System.out.println(x.getCustomerCode() + " " + x.getCustomerCity()));
+        session.close();
+    }
+
+    public static void loadOrders(SessionFactory sessionFactory) {
+        System.out.println("-- loading orders --");
+        Session session = sessionFactory.openSession();
+        @SuppressWarnings("unchecked")
+        List<Order> orders = session.createQuery("FROM entities.Order").list();
+        orders.forEach((x) -> System.out.println(x.getOrderNumber() + " " + x.getOrderDescription()));
         session.close();
     }
 }
