@@ -44,6 +44,10 @@ public class Customer {
     @Column(name = "AGENT_CODE")
     private String agentCode;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CUST_CODE")
+    private Set<Order> orders;
+
     public String getCustomerCode() {
         return customerCode;
     }
@@ -128,8 +132,11 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    @ManyToOne(targetEntity = Agent.class)
     public String getAgentCode() { return agentCode; }
 
     public void setAgentCode(String agentCode) { this.agentCode = agentCode; }
+
+    public Set<Order> getOrders() { return orders; }
+
+    public void setOrders(Set<Order> orders) { this.orders = orders; }
 }

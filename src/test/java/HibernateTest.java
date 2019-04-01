@@ -29,6 +29,19 @@ public class HibernateTest {
         DbSteps.printAllAgents(sessionFactory);
     }
 
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "innerJoin")
+    void innerJoin(String request) {
+        DbSteps.innerJoin(request, sessionFactory);
+    }
+
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "leftJoin")
+    void leftJoin(String request) {
+        DbSteps.leftOuterJoin(request, sessionFactory);
+
+        DbSteps.printAllCustomers(sessionFactory);
+        DbSteps.printAllOrders(sessionFactory);
+    }
+
     @AfterClass
     void closeConnection(){
         sessionFactory.close();

@@ -23,6 +23,34 @@ public class DbSteps {
         session.close();
     }
 
+    public static void innerJoin(String request, SessionFactory sessionFactory) {
+        System.out.println("-- joining tables --");
+        Session session = sessionFactory.openSession();
+        List<?> list = session.createQuery(request).list();
+        for(int i=0; i<list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            Agent agent = (Agent) row[0];
+            Customer customer = (Customer) row[1];
+            System.out.println("AgentCode: "+agent.getAgentCode()+", AgentName: "+ agent.getAgentName()+
+                    ", CustomerName:"+ customer.getCustomerName()+", CustomerPhone:"+ customer.getPhoneNumber());
+        }
+        session.close();
+    }
+
+    public static void leftOuterJoin(String request, SessionFactory sessionFactory) {
+        System.out.println("-- left join loading --");
+        Session session = sessionFactory.openSession();
+        List<?> list = session.createQuery(request).list();
+        for(int i=0; i<list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            Customer customer = (Customer) row[0];
+            Order order = (Order) row[1];
+            System.out.println("CustomerCode: "+customer.getCustomerCode() +", CustomerName: "+ customer.getCustomerName()+
+                    ", Order number:"+ order.getOrderNumber()+", get order date:"+ order.getOrderDate());
+        }
+        session.close();
+    }
+
     public static void printAllCustomers(SessionFactory sessionFactory) {
         System.out.println("-- printing customers --");
         Session session = sessionFactory.openSession();

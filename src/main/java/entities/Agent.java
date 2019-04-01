@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "AGENTS")
@@ -23,6 +24,14 @@ public class Agent {
 
     @Column(name = "COUNTRY")
     private String country;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AGENT_CODE")
+    private Set<Customer> customers;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AGENT_CODE")
+    private Set<Customer> ordersCustomerCode;
 
     public Agent(){}
 
@@ -72,5 +81,13 @@ public class Agent {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 }

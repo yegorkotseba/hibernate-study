@@ -60,7 +60,6 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    @ManyToOne(targetEntity = Customer.class)
     public String getCustomerCode() {
         return customerCode;
     }
@@ -69,7 +68,6 @@ public class Order {
         this.customerCode = customerCode;
     }
 
-    @ManyToOne(targetEntity = Agent.class)
     public String getAgentCode() {
         return agentCode;
     }

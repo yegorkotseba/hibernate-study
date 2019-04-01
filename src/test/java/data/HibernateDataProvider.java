@@ -18,4 +18,20 @@ public class HibernateDataProvider {
                 {agent}
         };
     }
+
+    @DataProvider
+    public static Object[][] innerJoin() {
+        String hql = "from Agent as ag inner join ag.customers as cust";
+        return new Object[][]{
+                {hql}
+        };
+    }
+
+    @DataProvider
+    public static Object[][] leftJoin() {
+        String hql = "from Customer as cust left outer join cust.orders as ord";
+        return new Object[][]{
+                {hql}
+        };
+    }
 }
