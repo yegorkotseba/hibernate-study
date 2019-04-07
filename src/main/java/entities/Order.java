@@ -83,4 +83,16 @@ public class Order {
     public void setOrderDescription(String orderDescription) {
         this.orderDescription = orderDescription;
     }
+
+    @Override
+    public String toString() {
+        return
+                "orderNumber " + orderNumber +
+                " orderAmount " + orderAmount +
+                " advanceAmount " + advanceAmount +
+                " orderDate " + orderDate +
+                " customerCode " + customerCode +
+                " agentCode " + agentCode +
+                " orderDescription " + orderDescription;
+    }
 }

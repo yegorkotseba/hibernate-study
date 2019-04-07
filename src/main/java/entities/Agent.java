@@ -90,4 +90,15 @@ public class Agent {
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
+
+    @Override
+    public String toString() {
+        return
+                "agentCode " + agentCode +
+                " agentName " + agentName +
+                " workingArea " + workingArea +
+                " commission " + commission +
+                " phoneNumber " + phoneNumber +
+                " country " + country;
+    }
 }

@@ -139,4 +139,21 @@ public class Customer {
     public Set<Order> getOrders() { return orders; }
 
     public void setOrders(Set<Order> orders) { this.orders = orders; }
+
+    @Override
+    public String toString() {
+        return
+                "customerCode " + customerCode +
+                " customerName " + customerName +
+                " customerCity " + customerCity +
+                " workingArea" + workingArea +
+                " customerCountry" + customerCountry +
+                " grade" + grade +
+                " openingAmt" + openingAmt +
+                " receiveAmt" + receiveAmt +
+                " paymentAmt" + paymentAmt +
+                " outstandingAmt" + outstandingAmt +
+                " phoneNumbers" + phoneNumber +
+                " agentCode" + agentCode;
+    }
 }
