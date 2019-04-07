@@ -11,6 +11,7 @@ public class DBDataProvider {
 
     public static void createTables() {
         try {
+            System.out.println("-- Starting DB creation --");
             Class.forName("org.h2.Driver");
             Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "", "");
             Statement stmt = conn.createStatement();
@@ -19,6 +20,7 @@ public class DBDataProvider {
             stmt.executeUpdate("DROP TABLE ORDERS");
             RunScript.execute(conn, new FileReader("src/main/resources/database.sql"));
             conn.close();
+            System.out.println("-- Finished DB creating --");
         }
         catch (Exception e){}
     }
