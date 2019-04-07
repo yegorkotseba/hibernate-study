@@ -37,7 +37,6 @@ public class HibernateTest {
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "leftJoin")
     void leftJoin(String request) {
         DbSteps.leftOuterJoin(request, sessionFactory);
-
         DbSteps.printAllCustomers(sessionFactory);
         DbSteps.printAllOrders(sessionFactory);
     }
