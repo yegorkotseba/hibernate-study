@@ -35,10 +35,13 @@ public class HibernateTest {
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "leftJoin")
-    void leftJoin(String request) {
+    void leftOuterJoin(String request) {
         DbSteps.leftOuterJoin(request, sessionFactory);
-        DbSteps.printAllCustomers(sessionFactory);
-        DbSteps.printAllOrders(sessionFactory);
+    }
+
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "rightJoin")
+    void rightOuterJoin(String request) {
+        DbSteps.rightOuterJoin(request, sessionFactory);
     }
 
     @AfterClass

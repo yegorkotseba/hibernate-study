@@ -3,7 +3,8 @@ package entities;
 import javax.persistence.*;
 import java.sql.Date;
 
-@Entity(name = "ORDERS")
+@Entity()
+@Table(name = "ORDERS")
 public class Order {
 
     @Id

@@ -42,11 +42,11 @@ public class DbSteps {
         System.out.println("-- joining tables --");
         Session session = sessionFactory.openSession();
         List<?> list = session.createQuery(request).list();
-        for(int i=0; i<2; i++) {
+        for(int i=0; i<list.size(); i++) {
             Object[] row = (Object[]) list.get(i);
             Agent agent = (Agent) row[0];
             Customer customer = (Customer) row[1];
-            System.out.println(agent.toString() + SPACE + customer.toString());
+            System.out.println(agent.toString() + SPACE + "\n" + customer.toString());
         }
         session.close();
     }
@@ -55,11 +55,24 @@ public class DbSteps {
         System.out.println("-- left join loading --");
         Session session = sessionFactory.openSession();
         List<?> list = session.createQuery(request).list();
-        for(int i=0; i<2; i++) {
+        for(int i=0; i<list.size(); i++) {
             Object[] row = (Object[]) list.get(i);
             Customer customer = (Customer) row[0];
             Order order = (Order) row[1];
-            System.out.println(customer.toString() + SPACE + order.toString());
+            System.out.println(customer.toString() + SPACE + "\n" + order.toString());
+        }
+        session.close();
+    }
+
+    public static void rightOuterJoin(String request, SessionFactory sessionFactory) {
+        System.out.println("-- right join loading --");
+        Session session = sessionFactory.openSession();
+        List<?> list = session.createQuery(request).list();
+        for(int i=0; i<list.size(); i++) {
+            Object[] row = (Object[]) list.get(i);
+            Agent agent = (Agent) row[0];
+            Order order = (Order) row[1];
+            System.out.println(agent.toString() + SPACE + "\n" + order.toString());
         }
         session.close();
     }

@@ -14,13 +14,13 @@ public class DBDataProvider {
             System.out.println("-- Starting DB creation --");
             Class.forName("org.h2.Driver");
             Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "", "");
+            System.out.println("-- Established connection --");
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DROP TABLE AGENTS");
             stmt.executeUpdate("DROP TABLE CUSTOMER");
             stmt.executeUpdate("DROP TABLE ORDERS");
+            System.out.println("-- Dropped tables --");
             RunScript.execute(conn, new FileReader("src/main/resources/database.sql"));
-            conn.close();
-            System.out.println("-- Finished DB creating --");
         }
         catch (Exception e){}
     }

@@ -27,11 +27,11 @@ public class Agent {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "AGENT_CODE")
-    private Set<Customer> customers;
+    private Set<Order> orders;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "AGENT_CODE")
-    private Set<Customer> ordersCustomerCode;
+    private Set<Customer> customers;
 
     public Agent(){}
 
@@ -90,6 +90,10 @@ public class Agent {
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
+
+    public Set<Order> getOrders() { return orders; }
+
+    public void setOrders(Set<Order> orders) { this.orders = orders; }
 
     @Override
     public String toString() {
