@@ -77,6 +77,14 @@ public class DbSteps {
         session.close();
     }
 
+    public static void count(String request, SessionFactory sessionFactory) {
+        System.out.println("-- count loading --");
+        Session session = sessionFactory.openSession();
+        List result = session.createSQLQuery(request).list();
+        System.out.println(result.toString());
+        session.close();
+    }
+
     public static void insertNewAgent(Agent agent, SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;

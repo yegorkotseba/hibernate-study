@@ -44,6 +44,11 @@ public class HibernateTest {
         DbSteps.rightOuterJoin(request, sessionFactory);
     }
 
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "count")
+    void count(String request) {
+        DbSteps.count(request, sessionFactory);
+    }
+
     @AfterClass
     void closeConnection(){
         sessionFactory.close();

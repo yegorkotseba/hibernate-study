@@ -42,4 +42,12 @@ public class HibernateDataProvider {
                 {hql}
         };
     }
+
+    @DataProvider
+    public static Object[][] count() {
+        String sql = "SELECT COUNT(ORD_AMOUNT) FROM ORDERS";
+        return new Object[][]{
+                {sql}
+        };
+    }
 }
