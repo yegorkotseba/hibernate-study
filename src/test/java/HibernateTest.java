@@ -29,6 +29,18 @@ public class HibernateTest {
         DbSteps.printAllAgents(sessionFactory);
     }
 
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "updateAgent")
+    void updateAgent(String agentName, String agentCode) {
+        DbSteps.updateAgent(agentName, agentCode, sessionFactory);
+        DbSteps.printAllAgents(sessionFactory);
+    }
+
+    @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "deleteAgent")
+    void deleteAgent(String agentCode) {
+        DbSteps.deleteAgent(agentCode, sessionFactory);
+        DbSteps.printAllOrders(sessionFactory);
+    }
+
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "innerJoin")
     void innerJoin(String request) {
         DbSteps.innerJoin(request, sessionFactory);

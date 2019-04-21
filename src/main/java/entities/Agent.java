@@ -25,11 +25,11 @@ public class Agent {
     @Column(name = "COUNTRY")
     private String country;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "AGENT_CODE")
     private Set<Order> orders;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "AGENT_CODE")
     private Set<Customer> customers;
 

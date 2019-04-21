@@ -20,6 +20,23 @@ public class HibernateDataProvider {
     }
 
     @DataProvider
+    public static Object[][] updateAgent() {
+        String name = "Update_Agent_Name";
+        String code = "A001";
+        return new Object[][]{
+                {name, code}
+        };
+    }
+
+    @DataProvider
+    public static Object[][] deleteAgent() {
+        String code = "A002";
+        return new Object[][]{
+                {code}
+        };
+    }
+
+    @DataProvider
     public static Object[][] innerJoin() {
         String hql = "from Agent as ag inner join ag.customers where ag.agentCode = 'A001'";
         return new Object[][]{

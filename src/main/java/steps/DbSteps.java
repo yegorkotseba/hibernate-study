@@ -104,4 +104,49 @@ public class DbSteps {
             session.close();
         }
     }
+
+    public static void updateAgent(String agentName, String agentCode, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try
+        {
+            tx = session.beginTransaction();
+            Agent agent = session.load(Agent.class, agentCode);
+            agent.setAgentName(agentName);
+            session.update(agent);
+            tx.commit();
+        }
+        catch (HibernateException ex)
+        {
+            if(tx != null)
+                tx.rollback();
+        }
+        finally
+        {
+            session.close();
+        }
+    }
+
+    public static void deleteAgent(String agentCode, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try
+        {
+            tx = session.beginTransaction();
+            List<Order> orders = session.createQuery("from Order where agentCode = '" + agentCode + "'").list();
+            orders.forEach(order -> session.delete(order));
+            List<Order> orders1 = session.createQuery("from Order where agentCode = '" + agentCode + "'").list();
+            orders1.forEach(order -> System.out.println("Orders " + order.toString()));
+            tx.commit();
+        }
+        catch (HibernateException ex)
+        {
+            if (tx != null)
+                tx.rollback();
+        }
+        finally
+        {
+            session.close();
+        }
+    }
 }
