@@ -1,68 +1,69 @@
 import data.DBDataProvider;
 import data.HibernateDataProvider;
 import entities.Agent;
-import org.hibernate.SessionFactory;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.DbSteps;
 
 public class HibernateTest {
 
-    public static final SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
-
     @BeforeClass
-    void prepareData() {
+    void createTables() {
         DBDataProvider.createTables();
     }
 
     @Test
     void getAllTables(){
-        DbSteps.printAllAgents(sessionFactory);
-        DbSteps.printAllCustomers(sessionFactory);
-        DbSteps.printAllOrders(sessionFactory);
+        DbSteps.printAllAgents();
+        DbSteps.printAllCustomers();
+        DbSteps.printAllOrders();
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "newAgent")
     void insertAgent(Agent agent) {
-        DbSteps.insertNewAgent(agent, sessionFactory);
-        DbSteps.printAllAgents(sessionFactory);
+        DbSteps.insertNewAgent(agent);
+        DbSteps.printAllAgents();
+        DbSteps.deleteAgentByCode(agent.getAgentCode());
+        DbSteps.printAllAgents();
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "updateAgent")
     void updateAgent(String agentName, String agentCode) {
-        DbSteps.updateAgent(agentName, agentCode, sessionFactory);
-        DbSteps.printAllAgents(sessionFactory);
+        DbSteps.updateAgent(agentName, agentCode);
+        DbSteps.printAllAgents();
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "deleteAgent")
     void deleteAgent(String agentCode) {
-        DbSteps.deleteAgent(agentCode, sessionFactory);
-        DbSteps.printAllOrders(sessionFactory);
+        DbSteps.deleteAgentByCode(agentCode);
+        DbSteps.printAllCustomers();
+        DbSteps.printAllOrders();
+        DbSteps.printAllAgents();
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "innerJoin")
-    void innerJoin(String request) {
-        DbSteps.innerJoin(request, sessionFactory);
+    void innerJoin(String agentCode) {
+        DbSteps.printAllAgents();
+        DbSteps.printAllCustomers();
+        DbSteps.innerJoin(agentCode);
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "leftJoin")
-    void leftOuterJoin(String request) {
-        DbSteps.leftOuterJoin(request, sessionFactory);
+    void leftOuterJoin(double orderAmount) {
+        DbSteps.printAllCustomers();
+        DbSteps.printAllOrders();
+        DbSteps.leftOuterJoin(orderAmount);
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "rightJoin")
-    void rightOuterJoin(String request) {
-        DbSteps.rightOuterJoin(request, sessionFactory);
+    void rightOuterJoin(String description) {
+        DbSteps.printAllAgents();
+        DbSteps.printAllOrders();
+        DbSteps.rightOuterJoin(description);
     }
 
     @Test(dataProviderClass = HibernateDataProvider.class, dataProvider = "count")
     void count(String request) {
-        DbSteps.count(request, sessionFactory);
-    }
-
-    @AfterClass
-    void closeConnection(){
-        sessionFactory.close();
+        DbSteps.count(request);
     }
 }

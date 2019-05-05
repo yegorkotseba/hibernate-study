@@ -8,7 +8,7 @@ public class HibernateDataProvider {
     @DataProvider
     public static Object[][] newAgent() {
         Agent agent = new Agent();
-        agent.setAgentCode("acode");
+        agent.setAgentCode("acode3");
         agent.setAgentName("aname");
         agent.setWorkingArea("warea");
         agent.setCommission(2.5);
@@ -21,7 +21,7 @@ public class HibernateDataProvider {
 
     @DataProvider
     public static Object[][] updateAgent() {
-        String name = "Update_Agent_Name";
+        String name = "Update_Agent_Name21";
         String code = "A001";
         return new Object[][]{
                 {name, code}
@@ -30,7 +30,7 @@ public class HibernateDataProvider {
 
     @DataProvider
     public static Object[][] deleteAgent() {
-        String code = "A002";
+        String code = "A012";
         return new Object[][]{
                 {code}
         };
@@ -38,25 +38,26 @@ public class HibernateDataProvider {
 
     @DataProvider
     public static Object[][] innerJoin() {
-        String hql = "from Agent as ag inner join ag.customers where ag.agentCode = 'A001'";
+        String agentCode = "A005";
         return new Object[][]{
-                {hql}
+                {agentCode}
         };
     }
 
     @DataProvider
     public static Object[][] leftJoin() {
-        String hql = "from Customer as cust left outer join cust.orders as ord where cust.customerName = 'Holmes'";
+        double orderAmount = 1000.00;
         return new Object[][]{
-                {hql}
+                {orderAmount}
         };
     }
 
     @DataProvider
     public static Object[][] rightJoin() {
-        String hql = "from Agent as ag right outer join ag.orders as ord where ag.agentCode = 'A001'";
+//        String hql = "from Agent as ag right outer join ag.orders as ord where ag.agentCode = 'A001'";
+        String description = "dos";
         return new Object[][]{
-                {hql}
+                {description}
         };
     }
 
