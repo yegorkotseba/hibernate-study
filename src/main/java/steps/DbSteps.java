@@ -44,7 +44,7 @@ public class DbSteps {
     }
 
     public static void innerJoin(String agentCode) {
-        System.out.println("-- joining tables --");
+        System.out.println("-- inner join --");
         Session session = sessionFactory.openSession();
 
         List<Customer> customers = new ArrayList<>();
@@ -54,8 +54,9 @@ public class DbSteps {
         List<Agent> agents = criteria.list();
         customers.addAll(agents.get(0).getCustomers());
         customers.forEach(customer -> {
-            System.out.println("Customer: " + customer.toString() + "\n" + "Related Agent: " + agents.get(0).toString());
+            System.out.println("Customer: " + customer.toString());
         });
+        System.out.println("Related Agent: " + agents.get(0).toString());
         session.close();
     }
 
@@ -92,6 +93,7 @@ public class DbSteps {
             });
             System.out.println("Related Agent: " + ag.toString());
         });
+        System.out.println("Finished outputting righ join");
         session.close();
     }
 
